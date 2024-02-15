@@ -1,5 +1,10 @@
 .container {
-  height: 100vh;
-  width: max-content;
-  background: red;
+  width: 30%;
+  border: 1px solid black;
+}
+
+@media (max-width: 768px) {
+  .container {
+    display: none;
+  }
 }

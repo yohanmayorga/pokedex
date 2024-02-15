@@ -14,17 +14,22 @@ export function Header() {
       </Link>
 
       <div className={styles.info}>
-        <Image src={ash} alt="ash" />
+        <Image src={ash} alt="ash" className={styles.image} />
         <div>
-          <div>
+          <div className={styles.titles}>
             <h1>Pokedex</h1>
             <Link
               href="https://github.com/yohanmayorga/pokedex"
               target="_black"
+              className={styles.connect}
             >
               <FiGithub />
             </Link>
-            <Link href="https://pokeapi.co/" target="_black">
+            <Link
+              href="https://pokeapi.co/"
+              target="_black"
+              className={styles.connect}
+            >
               <IoDocumentTextOutline />
             </Link>
           </div>
@@ -32,7 +37,7 @@ export function Header() {
           <div>
             <p>
               Simple web application containing the information of
-              <strong>151 Pokemon.</strong>
+              <strong> 151 Pokemon. </strong>
               The purpose of the application is to demonstrate a simple way to
               obtain and display free information available on the web, through
               the use of <strong>APIs.</strong>
