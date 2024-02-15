@@ -51,30 +51,30 @@ export function PokemonGrid({ pokemonList }: PokemonGridProps) {
         {filteredPokemonList.map((pokemon: any) => {
           return (
             <div key={pokemon.id} className={styles.pokemonCard}>
-              <Image
+              {/*<Image
                 src={pokemon.sprites.other["official-artwork"].front_default}
                 alt="photo"
                 width={120}
                 height={120}
                 className={styles.pokePicture}
-              />
+          />*/}
               <h1 className={styles.pokeName}>
                 {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
               </h1>
 
-              <div className={styles.experience}>
+              {/* <div className={styles.experience}>
                 Experience: {pokemon.base_experience}
-              </div>
+              </div> />*/}
 
               <div className={styles.details}>
                 <div>
                   <div className={styles.topDetail}>{pokemon.weight}</div>
                   <div className={styles.bottomDetail}>Weight</div>
                 </div>
-                <div>
+                {/*  <div>
                   <div className={styles.topDetail}>{pokemon.height}</div>
                   <div className={styles.bottomDetail}>Height</div>
-                </div>
+                </div> />*/}
               </div>
             </div>
           );

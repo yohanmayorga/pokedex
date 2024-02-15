@@ -1,7 +1,9 @@
 const POKEMON_API = "https://pokeapi.co/api/v2/";
 
-interface PokemonGridProps {
-  pokemonList: any;
+interface PokemonObject {
+  id: number;
+  name: string;
+  weight: number;
 }
 
 export async function getPokemonList() {
@@ -16,12 +18,18 @@ export async function getPokemon(name: string) {
   return data;
 }
 
-export async function server() {
-  const list = [];
+export async function server(): Promise<PokemonObject[]> {
   const mylist = await getPokemonList();
+  const pokemonList: PokemonObject[] = [];
+
   for (let i = 0; i < mylist.length; i++) {
     const pokemonObject = await getPokemon(mylist[i].name);
-    list.push(pokemonObject);
+    const pokemonObject2: PokemonObject = {
+      id: pokemonObject.id,
+      name: pokemonObject.name,
+      weight: pokemonObject.weight,
+    };
+    pokemonList.push(pokemonObject2);
   }
-  return list;
+  return pokemonList;
 }
