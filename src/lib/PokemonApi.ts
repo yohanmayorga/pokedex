@@ -4,6 +4,9 @@ interface PokemonObject {
   id: number;
   name: string;
   weight: number;
+  height: number;
+  experience: number;
+  image: string;
 }
 
 export async function getPokemonList() {
@@ -28,6 +31,9 @@ export async function server(): Promise<PokemonObject[]> {
       id: pokemonObject.id,
       name: pokemonObject.name,
       weight: pokemonObject.weight,
+      height: pokemonObject.height,
+      experience: pokemonObject.base_experience,
+      image: pokemonObject.sprites.other["official-artwork"].front_default,
     };
     pokemonList.push(pokemonObject2);
   }
