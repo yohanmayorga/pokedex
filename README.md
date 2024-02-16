@@ -24,4 +24,4 @@ This open source project is completely free to use, download and customize.
 
 ## Deploy on Vercel
 
-The website is available at this [link.](https://pokedex-kt0s464md-yohanmayorgas-projects.vercel.app/)
+The website is available at this [link.](https://pokedexapp-omega.vercel.app/)
