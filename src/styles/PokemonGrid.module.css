@@ -1,8 +1,37 @@
 .container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   width: 100%;
-  background: black;
+}
+
+.pokedexContainer {
+  height: 100vh;
+  width: 30%;
+  position: sticky;
+  top: 0;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  padding-top: 2rem;
+}
+
+.pokedexBox {
+  background: white;
+  border-radius: 25px;
+  height: 70vh;
+  width: 30dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pokedexImage {
+  margin-top: -2rem;
+}
+
+.fullList {
+  display: flex;
+  flex-direction: column;
 }
 
 .searchbar {
@@ -41,14 +70,17 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  width: 100%;
+}
+
+.selected {
+  color: yellow;
 }
 
 .pokemonCard {
   display: flex;
   flex-direction: column;
   padding: 0.5rem;
-  width: 15rem;
+  width: 20rem;
   background: rgb(0, 0, 0);
   background: linear-gradient(
     180deg,
@@ -60,6 +92,10 @@
   margin: 0.5%;
 }
 
+.pokemonCard:hover {
+  cursor: pointer;
+}
+
 .pokeName {
   color: white;
   text-align: center;
@@ -67,6 +103,16 @@
 
 .pokePicture {
   margin: auto;
+  transition: opacity 1s ease-in-out;
+}
+
+@keyframes opacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .experience {

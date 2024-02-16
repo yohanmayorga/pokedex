@@ -1,4 +1,4 @@
-.body {
-  display: flex;
-  flex-direction: row;
+.container {
+  background: black;
+  min-height: 100vh;
 }
