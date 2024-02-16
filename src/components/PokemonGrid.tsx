@@ -1,8 +1,9 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "@/styles/PokemonGrid.module.css";
 import { FaSearch } from "react-icons/fa";
 import { RiBarChart2Fill } from "react-icons/ri";
+import { MdClose } from "react-icons/md";
 import pokeball from "@/../../public/assets/pokeball.png";
 import Image from "next/image";
 
@@ -26,6 +27,7 @@ function formatHeight(height: any) {
 export function PokemonGrid({ pokemonList }: PokemonGridProps) {
   const [searchText, setSearchText] = useState("");
   const [showSelected, setShowSelected] = useState(false);
+  const [mobilebox, setMobileBox] = useState(false);
   const [selected, setSelected] = useState({
     id: "",
     image: "",
@@ -35,6 +37,25 @@ export function PokemonGrid({ pokemonList }: PokemonGridProps) {
     experience: "",
     types: [],
     stats: [],
+  });
+
+  const useOutsideClick = (callback: () => void) => {
+    const ref = useRef<HTMLDivElement>(null);
+    useEffect(() => {
+      const handleClickOutside = (event: MouseEvent) => {
+        if (ref.current && !ref.current.contains(event.target as Node)) {
+          callback();
+        }
+      };
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, [callback]);
+    return ref;
+  };
+  const ref = useOutsideClick(() => {
+    setMobileBox(false);
   });
 
   const searchFilter = (pokemonList: any) => {
@@ -55,7 +76,7 @@ export function PokemonGrid({ pokemonList }: PokemonGridProps) {
       stats: pokeName.stats,
     });
     setShowSelected(true);
-    console.log(selected);
+    setMobileBox(true);
   };
   const filteredPokemonList = searchFilter(pokemonList);
 
@@ -159,6 +180,107 @@ export function PokemonGrid({ pokemonList }: PokemonGridProps) {
       </div>
 
       {/*Pokedex Mobile*/}
+      {mobilebox && (
+        <div className={styles.mobileContainer} ref={ref}>
+          {!showSelected && (
+            <div className={styles.pokedexABox}>
+              <MdClose
+                className={styles.close}
+                onClick={() => setMobileBox(false)}
+              />
+              <Image
+                src={pokeball}
+                className={styles.pokedexImage}
+                alt="pokedex"
+                width={200}
+                height={200}
+                style={{ padding: "1rem" }}
+              />
+              <h1 className={styles.pokedexATitle}>Pokedex</h1>
+              <p className={styles.pokedexText}>
+                Select a <strong>Pokémon </strong>from the list {<br />}to
+                <strong>see more details </strong>such as its <br />
+                experience, types, and all <br />
+                its statistics.
+              </p>
+            </div>
+          )}
+
+          {showSelected && (
+            <div className={styles.pokedexABox}>
+              <MdClose
+                className={styles.close}
+                onClick={() => setMobileBox(false)}
+              />
+              <Image
+                src={selected.image}
+                className={styles.pokedexImage}
+                alt="pokedex"
+                width={200}
+                height={200}
+              />
+              <div className={styles.pokeContent}>
+                {/*Title and experience*/}
+                <h1 className={styles.pokedexATitle}>
+                  {selected.name.charAt(0).toUpperCase() +
+                    selected.name.slice(1)}
+                </h1>
+                <RiBarChart2Fill /> Experience: {selected.experience}
+                {/*Detailed info*/}
+                <div className={styles.pokeInfo}>
+                  <div className={styles.infoSplit}>
+                    <div className={styles.infoTop}>
+                      {formatWeight(selected.weight)}
+                    </div>
+                    <div className={styles.infoBottom}>Weight</div>
+                  </div>
+
+                  <div className={styles.infoSplit}>
+                    <div className={styles.pokedexAExp}>
+                      {selected.types.map((type: any) => {
+                        return (
+                          <div
+                            key={selected.types[type.name]}
+                            className={styles.infoTop}
+                          >
+                            {type.charAt(0).toUpperCase() + type.slice(1)}
+                          </div>
+                        );
+                      })}
+                    </div>
+                    <div className={styles.infoBottom}>Type</div>
+                  </div>
+
+                  <div className={styles.infoSplit}>
+                    <div className={styles.infoSplit}>
+                      <div className={styles.infoTop}>
+                        {formatHeight(selected.height)}
+                      </div>
+                      <div className={styles.infoBottom}>Height</div>
+                    </div>
+                  </div>
+                </div>
+                {/*Stats*/}
+                {selected.stats.map((statobject: any) => {
+                  const statName = statobject.name;
+                  const statValue = statobject.baseStat;
+                  return (
+                    <div key={statName} className={styles.statContent}>
+                      <div
+                        className={styles.statInfo}
+                        style={{ width: `${statValue}%` }}
+                      >
+                        {statName.charAt(0).toUpperCase() + statName.slice(1)}:{" "}
+                        {statValue}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
 
       <div className={styles.fullList}>
         {/*Search bar*/}
