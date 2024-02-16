@@ -8,6 +8,12 @@ interface PokemonObject {
   experience: number;
   image: string;
   types: [];
+  stats: statObject[];
+}
+
+interface statObject {
+  baseStat: number;
+  name: string;
 }
 
 export async function getPokemonList() {
@@ -29,6 +35,12 @@ export async function server(): Promise<PokemonObject[]> {
   for (let i = 0; i < mylist.length; i++) {
     const pokemonObject = await getPokemon(mylist[i].name);
     const typeNames = pokemonObject["types"].map((type: any) => type.type.name);
+    const statList = pokemonObject.stats.map((statObject: any) => {
+      return {
+        baseStat: statObject.base_stat,
+        name: statObject.stat.name,
+      };
+    });
     const pokemonObject2: PokemonObject = {
       id: pokemonObject.id,
       name: pokemonObject.name,
@@ -37,6 +49,7 @@ export async function server(): Promise<PokemonObject[]> {
       experience: pokemonObject.base_experience,
       image: pokemonObject.sprites.other["official-artwork"].front_default,
       types: typeNames,
+      stats: statList,
     };
     pokemonList.push(pokemonObject2);
   }

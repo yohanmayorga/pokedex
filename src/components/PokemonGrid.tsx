@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import styles from "@/styles/PokemonGrid.module.css";
 import { FaSearch } from "react-icons/fa";
 import { RiBarChart2Fill } from "react-icons/ri";
+import pokeball from "@/../../public/assets/pokeball.png";
 import Image from "next/image";
 
 interface PokemonGridProps {
@@ -33,6 +34,7 @@ export function PokemonGrid({ pokemonList }: PokemonGridProps) {
     height: "",
     experience: "",
     types: [],
+    stats: [],
   });
 
   const searchFilter = (pokemonList: any) => {
@@ -50,6 +52,7 @@ export function PokemonGrid({ pokemonList }: PokemonGridProps) {
       experience: pokeName.experience,
       image: pokeName.image,
       types: pokeName.types,
+      stats: pokeName.stats,
     });
     setShowSelected(true);
     console.log(selected);
@@ -63,7 +66,22 @@ export function PokemonGrid({ pokemonList }: PokemonGridProps) {
         <div className={styles.pokedexBox}>
           {/*Inactive*/}
           {!showSelected && (
-            <div className={styles.emptyBox}>Select a Pokemon</div>
+            <div className={styles.pokedexABox}>
+              <Image
+                src={pokeball}
+                className={styles.pokedexImage}
+                alt="pokedex"
+                width={250}
+                height={250}
+                style={{ padding: "1rem" }}
+              />
+              <h1 className={styles.pokedexATitle}>Pokedex</h1>
+              <p className={styles.pokedexText}>
+                Select a <strong>Pokémon </strong>from the list to{" "}
+                <strong>see more details </strong>such as its experience, types,
+                and all its statistics.
+              </p>
+            </div>
           )}
 
           {/*Active*/}
@@ -77,11 +95,13 @@ export function PokemonGrid({ pokemonList }: PokemonGridProps) {
                 height={250}
               />
               <div className={styles.pokeContent}>
+                {/*Title and experience*/}
                 <h1 className={styles.pokedexATitle}>
                   {selected.name.charAt(0).toUpperCase() +
                     selected.name.slice(1)}
                 </h1>
                 <RiBarChart2Fill /> Experience: {selected.experience}
+                {/*Detailed info*/}
                 <div className={styles.pokeInfo}>
                   <div className={styles.infoSplit}>
                     <div className={styles.infoTop}>
@@ -115,6 +135,22 @@ export function PokemonGrid({ pokemonList }: PokemonGridProps) {
                     </div>
                   </div>
                 </div>
+                {/*Stats*/}
+                {selected.stats.map((statobject: any) => {
+                  const statName = statobject.name;
+                  const statValue = statobject.baseStat;
+                  return (
+                    <div key={statName} className={styles.statContent}>
+                      <div
+                        className={styles.statInfo}
+                        style={{ width: `${statValue}%` }}
+                      >
+                        {statName.charAt(0).toUpperCase() + statName.slice(1)}:{" "}
+                        {statValue}
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           )}
