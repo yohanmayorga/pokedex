@@ -22,7 +22,7 @@
 .pokedexBox {
   background: #ffcb03;
   border-radius: 25px;
-  height: 70vh;
+  height: 95vh;
 }
 
 .pokeContent {
@@ -43,6 +43,16 @@
 
 .pokedexImage {
   margin-top: -2rem;
+  animation: appear 1s ease-in;
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .pokeInfo {
@@ -54,7 +64,7 @@
   padding: 0.5rem;
   border: 1px solid black;
   width: 100%;
-  align-items: baseline;
+  align-items: end;
 }
 
 .infoSplit {
@@ -75,6 +85,7 @@
 .fullList {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .searchbar {

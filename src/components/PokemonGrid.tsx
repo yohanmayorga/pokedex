@@ -94,7 +94,12 @@ export function PokemonGrid({ pokemonList }: PokemonGridProps) {
                     <div className={styles.pokedexAExp}>
                       {selected.types.map((type: any) => {
                         return (
-                          <div key={selected.types[type.name]}>{type}</div>
+                          <div
+                            key={selected.types[type.name]}
+                            className={styles.infoTop}
+                          >
+                            {type.charAt(0).toUpperCase() + type.slice(1)}
+                          </div>
                         );
                       })}
                     </div>
@@ -104,7 +109,7 @@ export function PokemonGrid({ pokemonList }: PokemonGridProps) {
                   <div className={styles.infoSplit}>
                     <div className={styles.infoSplit}>
                       <div className={styles.infoTop}>
-                        {formatWeight(selected.height)}
+                        {formatHeight(selected.height)}
                       </div>
                       <div className={styles.infoBottom}>Height</div>
                     </div>
