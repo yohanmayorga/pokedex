@@ -10,11 +10,11 @@ export function Header() {
   return (
     <div className={styles.container}>
       <Link href="/">
-        <Image src={logo} alt="logo" className={styles.logo} />
+        <Image src={logo} alt="logo" className={styles.logo} priority />
       </Link>
 
       <div className={styles.info}>
-        <Image src={ash} alt="ash" className={styles.image} />
+        <Image src={ash} alt="ash" className={styles.image} priority />
         <div>
           <div className={styles.titles}>
             <h1>Pokedex</h1>

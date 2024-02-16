@@ -7,6 +7,7 @@ interface PokemonObject {
   height: number;
   experience: number;
   image: string;
+  types: [];
 }
 
 export async function getPokemonList() {
@@ -27,6 +28,7 @@ export async function server(): Promise<PokemonObject[]> {
 
   for (let i = 0; i < mylist.length; i++) {
     const pokemonObject = await getPokemon(mylist[i].name);
+    const typeNames = pokemonObject["types"].map((type: any) => type.type.name);
     const pokemonObject2: PokemonObject = {
       id: pokemonObject.id,
       name: pokemonObject.name,
@@ -34,6 +36,7 @@ export async function server(): Promise<PokemonObject[]> {
       height: pokemonObject.height,
       experience: pokemonObject.base_experience,
       image: pokemonObject.sprites.other["official-artwork"].front_default,
+      types: typeNames,
     };
     pokemonList.push(pokemonObject2);
   }
