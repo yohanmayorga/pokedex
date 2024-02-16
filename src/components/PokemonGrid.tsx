@@ -27,6 +27,7 @@ function formatHeight(height: any) {
 export function PokemonGrid({ pokemonList }: PokemonGridProps) {
   const [searchText, setSearchText] = useState("");
   const [showSelected, setShowSelected] = useState(false);
+  const [showpokeball, setShowpokeball] = useState(false);
   const [mobilebox, setMobileBox] = useState(false);
   const [selected, setSelected] = useState({
     id: "",
@@ -281,6 +282,16 @@ export function PokemonGrid({ pokemonList }: PokemonGridProps) {
           )}
         </div>
       )}
+
+      {/*Pokeball for mobile*/}
+      <Image
+        src={pokeball}
+        alt="pokedex"
+        width={50}
+        height={50}
+        className={styles.activeMobile}
+        onClick={() => setMobileBox(true)}
+      />
 
       <div className={styles.fullList}>
         {/*Search bar*/}

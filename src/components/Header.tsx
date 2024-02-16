@@ -40,7 +40,8 @@ export function Header() {
               <strong> 151 Pokemon. </strong>
               The purpose of the application is to demonstrate a simple way to
               obtain and display free information available on the web, through
-              the use of <strong>APIs.</strong>
+              the use of <strong>APIs.</strong> Cretad by{" "}
+              <strong>Yohan Mayorga.</strong>
             </p>
           </div>
         </div>
