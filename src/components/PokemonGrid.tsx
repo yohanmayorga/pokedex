@@ -100,7 +100,7 @@ export function PokemonGrid({ pokemonList }: PokemonGridProps) {
               <h1 className={styles.pokedexATitle}>Pokedex</h1>
               <p className={styles.pokedexText}>
                 Select a <strong>Pokémon </strong>from the list {<br />}to
-                <strong>see more details </strong>such as its <br />
+                <strong> see more details </strong>such as its <br />
                 experience, types, and all <br />
                 its statistics.
               </p>
@@ -200,7 +200,7 @@ export function PokemonGrid({ pokemonList }: PokemonGridProps) {
               <h1 className={styles.pokedexATitle}>Pokedex</h1>
               <p className={styles.pokedexText}>
                 Select a <strong>Pokémon </strong>from the list {<br />}to
-                <strong>see more details </strong>such as its <br />
+                <strong> see more details </strong>such as its <br />
                 experience, types, and all <br />
                 its statistics.
               </p>
